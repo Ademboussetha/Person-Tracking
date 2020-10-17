@@ -7,9 +7,9 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 def send_mail(time):
 
-    gmailUser = 'adamboussatha0@gmail.com'
-    gmailPassword = "getthefuckout"
-    recipient = 'ademboussetha@gmail.com'
+    gmailUser = 'from@exemple.com'
+    gmailPassword = "password"
+    recipient = 'reciever@exmple.com'
     message='Un intrus est entrée à votre maison à : '+ time
     msg = MIMEMultipart()
     msg['From'] = gmailUser
