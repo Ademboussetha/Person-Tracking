@@ -10,6 +10,7 @@ import os
 import datetime
 import deep_learning_object_detection as objectdetection
 import color_classification_image
+#IN CASE YOU USE IP CAMERA
 """os.environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;0"
  IP CAMERA DATA
 MOUVEMENT_CAMERA_IP="http://192.168.1.107:5000/"
@@ -35,7 +36,6 @@ def centrelazied ():
 				movecamera.moveCamera(0,1,MOUVEMENT_CAMERA_IP)	"""
 cap = cv2.VideoCapture(2)
 current_time= datetime.datetime.now()
-# current =datetime.datetime.now().time()
 while True :
 	ret, frame = cap.read()
 	faces.facedetection(frame)
@@ -45,5 +45,3 @@ while True :
 
 cap.release()
 cv2.destroyAllWindows()
-# faces.facedetection()
-# mc.moveCamera(1,2,CAMERA_IP)

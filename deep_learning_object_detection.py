@@ -5,7 +5,6 @@ Email : ademboussetha@gmail.com
 # USAGE
 # python3 start.py --prototxt MobileNetSSD_deploy.prototxt.txt --model MobileNetSSD_deploy.caffemodel
 
-# import the necessary packages
 import numpy as np
 import argparse
 import cv2
@@ -13,8 +12,6 @@ def objecttracking(imageinput):
 	global who
 # construct the argument parse and parse the arguments
 	ap = argparse.ArgumentParser()
-	# ap.add_argument("-i", "--image", required=True,
-	# 	help="path to input image")
 	ap.add_argument("-p", "--prototxt", required=True,
 		help="path to Caffe 'deploy' prototxt file")
 	ap.add_argument("-m", "--model", required=True,
@@ -80,6 +77,3 @@ def objecttracking(imageinput):
 				if result=="person":
 					cv2.imwrite("outputobjectdetection.png",image2[startY:startY+endY,startX:startX+endX])
 					print("picture saved.")
-# show the output image
-# cv2.imshow("Output", image)
-# cv2.waitKey(0)

@@ -12,11 +12,6 @@ import os
 import os.path
 import sys
 
-# # read the test image
-# try:
-#     source_image = cv2.imread(sys.argv[1])
-# except:
-#     source_image = cv2.imread('yolooutput.png')
 global color
 def getColor(imageinput):
     source_image=cv2.imread(imageinput)
@@ -31,22 +26,8 @@ def getColor(imageinput):
         print ('training data is being created...')
         open('training.data', 'w')
         color_histogram_feature_extraction.training()
-        # print ('training data is ready, classifier is loading...')
-
     # get the prediction
     color_histogram_feature_extraction.color_histogram_of_test_image(source_image)
     prediction = knn_classifier.main('training.data', 'test.data')
     print('Detected color is:', prediction)
     return prediction
-    # cv2.putText(
-    #     source_image,
-    #     'Prediction: ' + prediction,
-    #     (15, 45),
-    #     cv2.FONT_HERSHEY_PLAIN,
-    #     3,
-    #     200,
-    #     )
-
-# # Display the resulting frame
-# cv2.imshow('color classifier', source_image)
-# cv2.waitKey(0)		

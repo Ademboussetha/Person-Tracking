@@ -25,7 +25,7 @@ yframe=0
 faceX=0
 faceY=0
 ser = serial.Serial(
-		'/dev/ttyACM0',
+		'/dev/ttyACM0', #this is the port for ubuntu users, if u're in windows it should be something like COM5 
 		baudrate=9600, 
 		timeout=1)
 with open("labels.pickle","rb") as f:
@@ -67,7 +67,7 @@ def facedetection(frame):
 			rounded_minute = round(minute)
 			hours=(rounded_minute/60)
 			print("unknown")
-			#on envoie une seule notification dans 24h pour qu'on spam pas l'email avec un mail chaque détection d'un intrus.
+			#we send just one notification/day so we wont spam the email.
 			if hours>22.0: 
 				now = datetime.datetime.now()
 				current_time = now.strftime("%H:%M:%S")
@@ -81,7 +81,6 @@ def facedetection(frame):
 		id_,conf=recognizer.predict(roi_gray)
 		global idk
 		if conf >=45 and conf<=85:
-			# print(labels[id_])
 			name=labels[id_]
 			cv2.imwrite("knownobjectdetection.png",frame)
 			objectdetection.objecttracking("knownobjectdetection.png")
@@ -99,7 +98,7 @@ def facedetection(frame):
 			stroke =2
 			cv2.putText(frame,name,(x,y),font,1,color,stroke,cv2.LINE_AA)
 			print (f"Person found : {name.capitalize()}")
-			match = True #if match = true, no need for yolo detection but in case its false we excute yolo
+			match = True
 		else :
 			match = False
 			print ("Person found : Unknown person")
@@ -127,7 +126,7 @@ def facedetection(frame):
 		else : 
 			with open('data.json') as f :
 				data=json.load(f)
-			#dans le cas ou il ya un visage mais c'est unknown
+			#In case we found a face but we dont recognize it 
 			if data['persons'][0]['shirt']== idk :
 				xcenter= int((objectdetection.startX+ objectdetection.endX)/2)
 				ycenter= int((objectdetection.startY+ objectdetection.endY)/3)
@@ -138,7 +137,7 @@ def facedetection(frame):
 				hours=(rounded_minute/60)
 				print ("hours : ",hours)
 				print("unknown")
-				#on envoie une seule notification dans 24h pour qu'on spam pas l'email avec un mail chaque détection d'un intrus.
+				#we send just one notification/day so we wont spam the email.
 				if hours>22.0: 
 					now = datetime.datetime.now()
 					current_time = now.strftime("%H:%M:%S")
